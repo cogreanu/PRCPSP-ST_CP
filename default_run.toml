@@ -1,0 +1,36 @@
+[local]
+processes = 24
+inputs = "../instances/*.dzn"
+
+[remote]
+inputs = "instances/*.dzn"
+destination = "cogreanu@login.delftblue.tudelft.nl"
+path = "/scratch/cogreanu"
+
+[remote.slurm]
+account = "education-eemcs-courses-cse3000"
+email = "C.Ogreanu@student.tudelft.nl"
+partition = "compute,compute-p2"
+time_limit = "00:10:10"
+memory_per_cpu = "4G"
+
+[programs.default]
+binary = "prcpsp-st"
+flags = ["-s", "default", "-t", "600000", "1"]
+
+[programs.grdlw]
+binary = "prcpsp-st"
+flags = ["-s", "grdlw", "-t", "600000", "1"]
+
+[programs.vslw]
+binary = "prcpsp-st"
+flags = ["-s", "vslw", "-t", "600000", "1"]
+
+[[runs]]
+program = "default"
+
+[[runs]]
+program = "grdlw"
+
+[[runs]]
+program = "vslw"
